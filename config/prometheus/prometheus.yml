@@ -28,3 +28,6 @@ scrape_configs:
 
     static_configs:
       - targets: ["prometheus:9090"]
+  - job_name: "monitoring-app1"
+    static_configs:
+      - targets: ["monitoringapp:12345"]
