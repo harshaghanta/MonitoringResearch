@@ -31,3 +31,24 @@ scrape_configs:
   - job_name: "monitoring-app1"
     static_configs:
       - targets: ["monitoringapp:12345"]
+  - job_name: 'node-exporter'         
+    ec2_sd_configs:
+      - region: ap-south-1
+        access_key: AKIATJFJMQDOXL5GLE4T
+        secret_key: --------------------
+        port: 9100
+        refresh_interval: 1m
+        filters:
+          - name: tag:nodeIdentifier
+            values:
+              - 'ec2-nodeexporter'
+    relabel_configs:
+      - source_labels:
+        - '__meta_ec2_tag_Name'
+        target_label: 'instance'
+      - source_labels:
+        - '__meta_ec2_tag_customer'
+        target_label:  'customer'
+      - source_labels:
+        - '__meta_ec2_tag_role'
+        target_label:  'role'
