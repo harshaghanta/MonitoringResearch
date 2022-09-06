@@ -13,6 +13,8 @@ curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compo
 
 chmod +x /usr/local/bin/docker-compose
 
+usermod -aG docker vagrant
+
 cd /vagrant/config 
 
 /usr/local/bin/docker-compose up -d
