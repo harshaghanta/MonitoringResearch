@@ -13,6 +13,8 @@ alerting:
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
+  - "prometheus_custom_metric_rules.yml"
+  - "prometheus_alert_rules.yml"
   # - "first_rules.yml"
   # - "second_rules.yml"
 
@@ -52,3 +54,7 @@ scrape_configs:
       - source_labels:
         - '__meta_ec2_tag_role'
         target_label:  'role'
+      # This section will take care of replacing the private aws ip with public ip
+      - source_labels: [__meta_ec2_public_ip]
+        replacement: ${1}:9100
+        target_label: __address__

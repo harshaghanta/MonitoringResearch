@@ -1,0 +1,5 @@
+groups:
+  - name: mycustom_rules
+    rules:
+      - record: system_cpu_usage_percent
+        expr: java_lang_OperatingSystem_SystemCpuLoad * 100
