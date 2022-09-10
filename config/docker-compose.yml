@@ -4,7 +4,10 @@ services:
     image: prom/prometheus
     container_name: prometheus
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      # - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      # - ./prometheus/prometheus_custom_metric_rules:/etc/prometheus/prometheus_custom_metric_rules
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
     expose:
       - 9090
     ports:
@@ -37,8 +40,18 @@ services:
       - "8888:8888"
     networks:
       - monitoring
+  alertmanager:
+    container_name: alertmanager
+    image: bitnami/alertmanager:latest
+    ports:
+      - 9093:9093
+    expose:
+      - 9093
+    networks:
+      - monitoring
 networks:
   monitoring:
 volumes:
   grafanadata:
+  prometheus_data:
   
