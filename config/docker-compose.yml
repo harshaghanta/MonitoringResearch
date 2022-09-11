@@ -43,6 +43,8 @@ services:
   alertmanager:
     container_name: alertmanager
     image: bitnami/alertmanager:latest
+    volumes:
+      - ./alertmanager/alertmanager.yml:/opt/bitnami/alertmanager/conf/config.yml
     ports:
       - 9093:9093
     expose:
